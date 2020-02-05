@@ -113,7 +113,7 @@ interface Prop {}
 interface State  {
     isFetchData: boolean,
     isFetchError: boolean,
-    fetchData: any
+    fetchData: any,
 }
 
 
@@ -123,8 +123,10 @@ class HomeScreen extends Component<Prop, State> {
         this.state = {
             isFetchData: false,
             isFetchError: false,
-            fetchData: []}
+            fetchData: [],
+        }
     }
+
 
     static navigationOptions = (navigation) => {
         return {
