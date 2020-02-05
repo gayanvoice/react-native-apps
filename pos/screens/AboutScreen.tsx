@@ -16,8 +16,9 @@ interface State {
     isFetchError: boolean,
     fetchData: any,
 }
+interface Props {}
 
-class AboutScreen extends Component<State> {
+class AboutScreen extends Component<State, Props> {
     state = {
         isFetchData: false,
         isFetchError: false,
