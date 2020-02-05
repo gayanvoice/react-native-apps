@@ -11,6 +11,7 @@ import {
     Dimensions,
     TouchableOpacity,
     ScrollView,
+    SafeAreaView,
     ProgressBarAndroid
 } from 'react-native';
 
@@ -110,9 +111,9 @@ const styles = StyleSheet.create({
 
 interface Prop {}
 interface State  {
-    isFetchData: false,
-    isFetchError: false,
-    fetchData: 0
+    isFetchData: boolean,
+    isFetchError: boolean,
+    fetchData: any
 }
 
 
@@ -122,12 +123,12 @@ class HomeScreen extends Component<Prop, State> {
         this.state = {
             isFetchData: false,
             isFetchError: false,
-            fetchData: 0}
+            fetchData: []}
     }
 
-    static navigationOptions = ({navigation}) => {
+    static navigationOptions = (navigation) => {
         return {
-            header: (
+            header: () => (
                 <>
                 <View style={[styles.flex, styles.row, styles.header,]}>
 
@@ -175,7 +176,9 @@ class HomeScreen extends Component<Prop, State> {
 
     renderOrders = () => {
         if(this.state.isFetchData) {
-            return (    <FlatList
+            return (
+                <SafeAreaView>
+                    <FlatList
                 horizontal
                 pagingEnabled
                 scrollEnabled
@@ -188,7 +191,9 @@ class HomeScreen extends Component<Prop, State> {
                     return  index.toString();
                 }}
                 renderItem={({ item, index }) => this.order_item(item, index)}
+
             />
+                </SafeAreaView>
             )
         } else {
             if(this.state.isFetchError){
@@ -288,7 +293,7 @@ class HomeScreen extends Component<Prop, State> {
         return (
         <>
             <View style={{flex: 1}}>
-              <ScrollView style={{flex: 1, backgroundColor: Colors.gray4}}>
+              <ScrollView style={{flex: 1, backgroundColor: Colors.gray4}} >
                   <View style={[styles.flex, styles.column ]}>
                       <View
                           style={[
