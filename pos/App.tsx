@@ -11,10 +11,14 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import HomeScreen from "./screens/HomeScreen";
+import ContactScreen from "./screens/ContactScreen";
 
 const AppNavigator = createStackNavigator(
     {
-        Home: {screen: HomeScreen},
+        Home: {
+            screen:  HomeScreen,
+        },
+        Contact: {screen: ContactScreen},
     },
     {
         initialRouteName: 'Home',
