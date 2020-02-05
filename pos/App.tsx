@@ -10,7 +10,7 @@ import * as Font from "expo-font";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 const AppNavigator = createStackNavigator(
     {
@@ -23,19 +23,14 @@ const AppNavigator = createStackNavigator(
 
 const AppContainer = createAppContainer(AppNavigator);
 
-interface Prop {
-
-}
-
-
-
+interface Prop {}
 interface State  {
     fontsLoaded: false;
 }
 
 
 
-class App extends Component<Prop, State> {
+export default class App extends Component<Prop, State> {
     constructor(props: State ) {
         super(props);
         this.state = {fontsLoaded: false};
@@ -73,4 +68,4 @@ class App extends Component<Prop, State> {
     }
 }
 
-export default App;
+
