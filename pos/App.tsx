@@ -21,6 +21,7 @@ export enum ROUTES {
 }
 
 
+// @ts-ignore
 const AppNavigator = createStackNavigator(
     {
         [ROUTES.MainHome]: { screen:  HomeScreen },
