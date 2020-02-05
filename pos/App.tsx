@@ -12,16 +12,23 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import HomeScreen from "./screens/HomeScreen";
 import ContactScreen from "./screens/ContactScreen";
+import AboutScreen from "./screens/AboutScreen";
+
+export enum ROUTES {
+    MainHome = "MainHome",
+    MainContact = "MainContact",
+    MainAbout = "MainAbout"
+}
+
 
 const AppNavigator = createStackNavigator(
     {
-        Home: {
-            screen:  HomeScreen,
-        },
-        Contact: {screen: ContactScreen},
+        [ROUTES.MainHome]: { screen:  HomeScreen },
+        [ROUTES.MainContact]: { screen: ContactScreen },
+        [ROUTES.MainAbout]: { screen: AboutScreen },
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: ROUTES.MainAbout,
     },
 );
 
