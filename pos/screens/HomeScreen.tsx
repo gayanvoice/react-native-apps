@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
 
 });
 
-const HomeScreen: React.FC = () => {
+const HomeScreen = ({navigation}) => {
     const [isFetchData, setIsFetchData] = React.useState(false);
     const [isFetchError, setIsFetchError] = React.useState(false);
     const [fetchData, setFetchData] = React.useState([]);
@@ -198,9 +198,7 @@ const HomeScreen: React.FC = () => {
 
     const renderBills = () => {
         if(isFetchData) {
-            // @ts-ignore
             return ( <FlatList
-                    vertical
                     pagingEnabled
                     scrollEnabled
                     showsHorizontalScrollIndicator={false}
@@ -211,7 +209,7 @@ const HomeScreen: React.FC = () => {
                     keyExtractor={(item, index) => {
                         return  index.toString();
                     }}
-                    renderItem={({ item }) => bill_item(item)}
+                    renderItem={({ item, index }) => bill_item(item , index)}
                     data={fetchData[1].items}
                 />
             )
@@ -230,9 +228,9 @@ const HomeScreen: React.FC = () => {
 
 
 
-    const bill_item = (item) => {
+    const bill_item = (item, key) => {
         return (
-            <TouchableOpacity activeOpacity={0.8}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Bill', { bill: item })} key={key}>
                 <View
                     style={[styles.flex]}
                 >
