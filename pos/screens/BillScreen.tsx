@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 });
 
 
-const BillScreen = ({route, navigation}) => {
+const BillScreen = ({route}) => {
     const {bill} = route.params;
     return (
         <>
