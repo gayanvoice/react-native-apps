@@ -1,6 +1,7 @@
 import React from 'react';
 import Colors from '../constants/Colors';
 import Sizes from '../constants/Sizes';
+import { FontAwesome } from '@expo/vector-icons';
 
 import {
     Text,
@@ -11,7 +12,7 @@ import {
     TouchableOpacity,
     ScrollView,
     SafeAreaView,
-    ProgressBarAndroid,
+    ProgressBarAndroid, Image,
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -254,6 +255,66 @@ const HomeScreen = ({navigation}) => {
         )
     };
 
+    const renderUsers = () => {
+        if(isFetchData) {
+            return ( <FlatList
+                    pagingEnabled
+                    scrollEnabled
+                    showsHorizontalScrollIndicator={false}
+                    decelerationRate={0}
+                    scrollEventThrottle={16}
+                    snapToAlignment="center"
+                    data={fetchData[2].items}
+                    keyExtractor={(item, index) => {
+                        return  index.toString();
+                    }}
+                    renderItem={({ item, index }) => user_item(item, index)}
+                />
+            )
+        } else {
+            if(isFetchError){
+                return (  <View style={{ flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.accent, padding: Sizes.padding }}>
+                    <Text style={{fontSize: Sizes.title, fontFamily: 'Montserrat-Bold', color: Colors.white}}>Connection error</Text>
+                    <Text style={{fontSize: Sizes.title/2, fontFamily: 'Montserrat-Regular', color: Colors.white}}>Check your internet connection or URL</Text>
+                </View> );
+            } else {
+                return ( <ProgressBarAndroid styleAttr="Horizontal" color="#2196F3" style={{backgroundColor: Colors.gray4, margin: Sizes.padding,}} /> );
+            }
+        }
+    };
+
+    const user_item = (item, index) => {
+        const isLastItem = index === fetchData[2].length - 1;
+        return (
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('User', { user: item })} key={index}>
+                <View
+                    style={[styles.flex]}
+                >
+                    <View style={[styles.row, { marginHorizontal: Sizes.padding,
+                        paddingVertical: Sizes.padding * 0.66, justifyContent: 'space-between', alignItems:'center', borderBottomColor: isLastItem ? null : Colors.light_gray, borderBottomWidth: isLastItem ? null : 1}]}>
+                        <View style={{ flex: 0, flexDirection: 'row'}}>
+                            <View style={{paddingEnd: Sizes.padding}}>
+                                <Image style={styles.avatar} source={{uri: item.image}} />
+                            </View>
+                            <View style={{ flex: 0 }}>
+                                <Text style={{ color: Colors.black, fontFamily: 'Montserrat-Bold', fontSize: Sizes.font }}>{item.username}</Text>
+                                <Text style={{ color: Colors.gray, fontFamily: 'Montserrat-Bold', fontSize: Sizes.font }}>{item.role}</Text>
+                            </View>
+                        </View>
+
+                        <View style={{ flex: 0 }}>
+                            <FontAwesome
+                                name={'circle'}
+                                color={item.status? Colors.active : Colors.light_gray}
+                                size={Sizes.font}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        )
+    };
+
 
 
     return (
@@ -292,6 +353,20 @@ const HomeScreen = ({navigation}) => {
                       </View>
                   </View>
 
+                  <View style={[ styles.column ]}>
+                      <View
+                          style={[
+                              styles.row,
+                              styles.contentRow
+                          ]}
+                      >
+                          <Text style={[styles.contentTitle, {paddingTop: Sizes.padding/2}]}>Users</Text>
+
+                      </View>
+                      <View>
+                          {renderUsers()}
+                      </View>
+                  </View>
 
               </ScrollView>
           </View>
