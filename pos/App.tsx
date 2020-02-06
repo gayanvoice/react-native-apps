@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { FontAwesome } from '@expo/vector-icons';
 
 import HomeScreen from "./screens/HomeScreen";
-import ContactScreen from "./screens/ContactScreen";
+import BillScreen from "./screens/BillScreen";
 import AboutScreen from "./screens/AboutScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import Colors from "./constants/Colors";
@@ -188,7 +188,17 @@ function AppStack() {
                         </View>
                     </>
                 ), }} />
-            <Stack.Screen name="Contact" component={ContactScreen} />
+            <Stack.Screen name="Bill" component={BillScreen} options={{ header: ({route, navigation}) => (
+                    <>
+                        <View style={[styles.flex, styles.row, styles.header]}>
+                            <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
+                                <FontAwesome name="chevron-left" color={Colors.black} size={Sizes.font} />
+                            </TouchableOpacity>
+                            <Text style={styles.title}># Bill</Text>
+                        </View>
+
+                    </>
+                ), headerTransparent: true, }} />
             <Stack.Screen name="About" component={AboutScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen}  options={{ title: 'My home',  header: ({navigation}) => (
                     <>
