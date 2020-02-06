@@ -3,16 +3,16 @@ import Colors from '../constants/Colors';
 import Sizes from '../constants/Sizes';
 
 import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
+    Text,
+    StyleSheet,
+    View,
+    Image,
     FlatList,
     Dimensions,
     TouchableOpacity,
     ScrollView,
     SafeAreaView,
-    ProgressBarAndroid
+    ProgressBarAndroid, Button
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -127,28 +127,6 @@ class HomeScreen extends Component<Prop, State> {
         }
     }
 
-
-    static navigationOptions = (navigation) => {
-        return {
-            header: () => (
-                <>
-                <View style={[styles.flex, styles.row, styles.header,]}>
-
-                    <View>
-                        <Text style={[styles.title]}>POS</Text>
-                    </View>
-                    <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.navigate('Settings')}}>
-                        <Image style={styles.avatar}
-                               source={{uri: 'https://avatars1.githubusercontent.com/u/30500175?s=48&v=4'}}
-                        />
-                    </TouchableOpacity>
-                </View>
-
-                </>
-            ),
-        };
-    };
-
     fetchAllStuff = () => {
         Promise.all([
             fetch('https://raw.githubusercontent.com/gayanvoice/expo-ui/master/pos/orders_data.json'),
@@ -179,6 +157,7 @@ class HomeScreen extends Component<Prop, State> {
     renderOrders = () => {
         if(this.state.isFetchData) {
             return (
+                <>
                 <SafeAreaView>
                     <FlatList
                 horizontal
@@ -196,6 +175,7 @@ class HomeScreen extends Component<Prop, State> {
 
             />
                 </SafeAreaView>
+                </>
             )
         } else {
             if(this.state.isFetchError){
@@ -327,6 +307,7 @@ class HomeScreen extends Component<Prop, State> {
                           {this.renderBills()}
                       </View>
                   </View>
+
 
               </ScrollView>
             </View>

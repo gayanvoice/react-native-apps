@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, ProgressBarAndroid, Text, View} from 'react-native';
+import {Button, Image, ProgressBarAndroid, Text, TouchableOpacity, View} from 'react-native';
 import { NavigationScreenProp, NavigationState } from 'react-navigation';
 import Colors from "../constants/Colors";
 import Sizes from "../constants/Sizes";
@@ -19,6 +19,7 @@ interface State {
 interface Props {}
 
 class AboutScreen extends Component<State, Props> {
+
     state = {
         isFetchData: false,
         isFetchError: false,
@@ -29,6 +30,14 @@ class AboutScreen extends Component<State, Props> {
         navigation: Navigation;
     }) => ({
         title: 'About',
+        header: () => (
+            <>
+                <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.navigate('Settings')}}>
+                    <Image source={{uri: 'https://avatars1.githubusercontent.com/u/30500175?s=48&v=4'}}
+                    />
+                </TouchableOpacity>
+            </>
+        ),
     });
 
     fetchAllStuff = () => {
