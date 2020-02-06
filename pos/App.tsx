@@ -10,12 +10,12 @@ import * as Font from "expo-font";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
+import { FontAwesome } from '@expo/vector-icons';
 
 import HomeScreen from "./screens/HomeScreen";
 import ContactScreen from "./screens/ContactScreen";
 import AboutScreen from "./screens/AboutScreen";
-import SupportScreen from "./screens/SupportScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 import Colors from "./constants/Colors";
 import Sizes from "./constants/Sizes";
 
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: Sizes.padding,
         paddingTop: Sizes.padding,
         paddingBottom: Sizes.padding * 0.66,
-        justifyContent: 'space-between',
         alignItems: 'center',
         fontFamily: 'Montserrat-Regular'
     },
@@ -113,29 +112,96 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Regular'
     },
 
+    back: {
+        width: Sizes.base * 3,
+        height: Sizes.base * 3,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+
+    content: {
+        paddingTop: Sizes.padding * 3,
+        paddingStart: Sizes.padding,
+        paddingEnd: Sizes.padding,
+    },
+
+    inputTitle: {
+        fontSize: Sizes.font,
+        color: Colors.gray,
+        fontFamily: 'Montserrat-Regular',
+        backgroundColor: 'transparent',
+    },
+
+    inputContent: {
+        fontSize: Sizes.font,
+        color: Colors.black,
+        fontFamily: 'Montserrat-Bold',
+        backgroundColor: 'transparent',
+    },
+
+    inputEdit: {
+        fontSize: Sizes.font,
+        color: Colors.active,
+        fontFamily: 'Montserrat-Bold',
+        backgroundColor: 'transparent',
+    },
+
+    inputStart: {
+        alignItems: 'flex-start',
+
+    },
+
+    inputEnd: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+    },
+
+    inputRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingBottom: Sizes.padding,
+    },
+
+    inputHorizontalRow: {
+        borderBottomColor: Colors.light_gray,
+        borderBottomWidth: 1,
+        marginBottom: Sizes.padding,
+    },
+
+
+
 });
 
 
-function MyStack() {
+function AppStack() {
     return (
         <Stack.Navigator initialRouteName={"Home"}>
-            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'My home',  header: ({navigation}) => (
+            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home',  header: ({navigation}) => (
                     <>
-                        <View style={[styles.flex, styles.row, styles.header,]}>
-
+                        <View style={[styles.flex, styles.row, styles.header, {justifyContent: 'space-between'}]}>
                             <View>
                                 <Text style={[styles.title]}>POS</Text>
                             </View>
-                            <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.navigate('Contact')}}>
+                            <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.navigate('Settings')}}>
                                 <Image style={styles.avatar} source={{uri: 'https://avatars1.githubusercontent.com/u/30500175?s=48&v=4'}} />
                             </TouchableOpacity>
                         </View>
-
                     </>
                 ), }} />
             <Stack.Screen name="Contact" component={ContactScreen} />
             <Stack.Screen name="About" component={AboutScreen} />
-            <Stack.Screen name="Support" component={SupportScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen}  options={{ title: 'My home',  header: ({navigation}) => (
+                    <>
+                        <View style={[styles.flex, styles.row, styles.header, {justifyContent:'flex-start'}]}>
+                            <TouchableOpacity style={[styles.back]}  onPress={() => navigation.goBack()}>
+                                <FontAwesome.Button name="chevron-left" color={Colors.black} backgroundColor={Colors.gray4} size={Sizes.font} />
+                            </TouchableOpacity>
+                            <Text style={styles.title}>Settings</Text>
+
+                        </View>
+
+                    </>
+                ), headerTransparent: true, }} />
         </Stack.Navigator>
     );
 }
@@ -162,7 +228,7 @@ export default class App extends Component {
     render() {
         if(this.state.fontsLoaded){
             return ( <NavigationContainer>
-                <MyStack />
+                <AppStack />
             </NavigationContainer>);
         } else {
             return (

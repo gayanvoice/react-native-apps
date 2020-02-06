@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Colors from '../constants/Colors';
 import Sizes from '../constants/Sizes';
 
@@ -6,13 +6,12 @@ import {
     Text,
     StyleSheet,
     View,
-    Image,
     FlatList,
     Dimensions,
     TouchableOpacity,
     ScrollView,
     SafeAreaView,
-    ProgressBarAndroid, Button
+    ProgressBarAndroid,
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -109,25 +108,16 @@ const styles = StyleSheet.create({
 
 });
 
-interface Prop {}
-interface State  {
-    isFetchData: boolean,
-    isFetchError: boolean,
-    fetchData: any,
-}
+const HomeScreen: React.FC = () => {
+    const [isFetchData, setIsFetchData] = React.useState(false);
+    const [isFetchError, setIsFetchError] = React.useState(false);
+    const [fetchData, setFetchData] = React.useState([]);
 
+    React.useEffect(() => {
+        fetchAllStuff();
+    });
 
-class HomeScreen extends Component<Prop, State> {
-    constructor(props: State ) {
-        super(props);
-        this.state = {
-            isFetchData: false,
-            isFetchError: false,
-            fetchData: [],
-        }
-    }
-
-    fetchAllStuff = () => {
+    const fetchAllStuff = () => {
         Promise.all([
             fetch('https://raw.githubusercontent.com/gayanvoice/expo-ui/master/pos/orders_data.json'),
             fetch('https://raw.githubusercontent.com/gayanvoice/expo-ui/master/pos/bill_data.json'),
@@ -139,46 +129,41 @@ class HomeScreen extends Component<Prop, State> {
             return [x, y, z]
         })
             .then((responseText) => {
-                this.setState({fetchData: responseText} as Prop);
+                setFetchData(responseText);
             })
             .then(() => {
-                this.setState({isFetchData: true} as Prop);
+                setIsFetchData(true);
             })
             .catch(() => {
-                this.setState({isFetchError: true} as Prop)
-        });
+                setIsFetchError(true);
+            });
     };
 
-    componentDidMount() {
-        this.fetchAllStuff();
-    }
-
-
-    renderOrders = () => {
-        if(this.state.isFetchData) {
+    const renderOrders = () => {
+        if(isFetchData) {
             return (
                 <>
-                <SafeAreaView>
-                    <FlatList
-                horizontal
-                pagingEnabled
-                scrollEnabled
-                showsHorizontalScrollIndicator={false}
-                scrollEventThrottle={16}
-                snapToAlignment="center"
-                style={[ styles.shadow, { overflow: 'visible' }]}
-                data={this.state.fetchData[0].items}
-                keyExtractor={(item, index) => {
-                    return  index.toString();
-                }}
-                renderItem={({ item, index }) => this.order_item(item, index)}
+                    <SafeAreaView>
+                        <FlatList
+                            horizontal
+                            pagingEnabled
+                            scrollEnabled
+                            showsHorizontalScrollIndicator={false}
+                            scrollEventThrottle={16}
+                            snapToAlignment="center"
+                            style={[ styles.shadow, { overflow: 'visible' }]}
+                            data={fetchData[0].items}
+                            keyExtractor={(item, index) => {
+                                return  index.toString();
+                            }}
+                            renderItem={({ item, index }) => order_item(item, index)}
 
-            />
-                </SafeAreaView>
+                        />
+                    </SafeAreaView>
                 </>
             )
         } else {
-            if(this.state.isFetchError){
+            if(isFetchError){
                 return (
                     <View style={{ flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.accent, padding: Sizes.padding }}>
                         <Text style={{fontSize: Sizes.title, fontFamily: 'Montserrat-Bold', color: Colors.white}}>Connection error</Text>
@@ -191,7 +176,7 @@ class HomeScreen extends Component<Prop, State> {
         }
     };
 
-    order_item = (item, index) => {
+    const order_item = (item, index) => {
         return (
             <View key={index} style={[
                 styles.flex, styles.column, styles.order_view, styles.shadow,
@@ -211,8 +196,8 @@ class HomeScreen extends Component<Prop, State> {
         )
     };
 
-    renderBills = () => {
-        if(this.state.isFetchData) {
+    const renderBills = () => {
+        if(isFetchData) {
             // @ts-ignore
             return ( <FlatList
                     vertical
@@ -226,12 +211,12 @@ class HomeScreen extends Component<Prop, State> {
                     keyExtractor={(item, index) => {
                         return  index.toString();
                     }}
-                    renderItem={({ item, index }) => this.bill_item(item, index)}
-                    data={this.state.fetchData[1].items}
+                    renderItem={({ item }) => bill_item(item)}
+                    data={fetchData[1].items}
                 />
             )
         } else {
-            if(this.state.isFetchError){
+            if(isFetchError){
                 return (  <View style={{ flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.accent, padding: Sizes.padding,
                     borderRadius: Sizes.padding}}>
                     <Text style={{fontSize: Sizes.title, fontFamily: 'Montserrat-Bold', color: Colors.white}}>Connection error</Text>
@@ -245,7 +230,7 @@ class HomeScreen extends Component<Prop, State> {
 
 
 
-    bill_item = (item, index) => {
+    const bill_item = (item) => {
         return (
             <TouchableOpacity activeOpacity={0.8}>
                 <View
@@ -271,10 +256,11 @@ class HomeScreen extends Component<Prop, State> {
         )
     };
 
-    render() {
-        return (
-        <>
-            <View style={{flex: 1}}>
+
+
+    return (
+      <>
+          <View style={{flex: 1}}>
               <ScrollView style={{flex: 1, backgroundColor: Colors.gray4}} >
                   <View style={[styles.flex, styles.column ]}>
                       <View
@@ -289,7 +275,7 @@ class HomeScreen extends Component<Prop, State> {
                           </TouchableOpacity>
                       </View>
                       <View style={[styles.column]}>
-                          {this.renderOrders()}
+                          {renderOrders()}
                       </View>
                   </View>
 
@@ -304,17 +290,17 @@ class HomeScreen extends Component<Prop, State> {
 
                       </View>
                       <View>
-                          {this.renderBills()}
+                          {renderBills()}
                       </View>
                   </View>
 
 
               </ScrollView>
-            </View>
-
-        </>
+          </View>
+      </>
     );
-  }
-}
 
-export default HomeScreen;
+
+};
+
+export  default HomeScreen;
