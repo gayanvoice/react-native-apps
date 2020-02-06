@@ -14,7 +14,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import HomeScreen from "./screens/HomeScreen";
 import BillScreen from "./screens/BillScreen";
-import AboutScreen from "./screens/AboutScreen";
+import UserScreen from "./screens/UserScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import Colors from "./constants/Colors";
 import Sizes from "./constants/Sizes";
@@ -188,7 +188,7 @@ function AppStack() {
                         </View>
                     </>
                 ), }} />
-            <Stack.Screen name="Bill" component={BillScreen} options={{ header: ({route, navigation}) => (
+            <Stack.Screen name="Bill" component={BillScreen} options={{ header: ({ navigation}) => (
                     <>
                         <View style={[styles.flex, styles.row, styles.header]}>
                             <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
@@ -199,8 +199,18 @@ function AppStack() {
 
                     </>
                 ), headerTransparent: true, }} />
-            <Stack.Screen name="About" component={AboutScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen}  options={{ title: 'My home',  header: ({navigation}) => (
+            <Stack.Screen name="User" component={UserScreen} options={{ header: ({navigation}) => (
+                    <>
+                        <View style={[styles.flex, styles.row, styles.header]}>
+                            <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
+                                <FontAwesome name="chevron-left" color={Colors.black} size={Sizes.font} />
+                            </TouchableOpacity>
+                            <Text style={styles.title}># User</Text>
+                        </View>
+
+                    </>
+                ), headerTransparent: true, }} />
+            <Stack.Screen name="Settings" component={SettingsScreen}  options={{ header: ({navigation}) => (
                     <>
                         <View style={[styles.flex, styles.row, styles.header, {justifyContent:'flex-start'}]}>
                             <TouchableOpacity style={[styles.back]}  onPress={() => navigation.goBack()}>
