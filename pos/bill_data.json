@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "id": 49,
+      "time": "1",
+      "cost": 25.00,
+      "items":[
+        {"id":0, "name":"Milk Shake", "items":4, "cost": 20},
+        {"id":1, "name":"Coca Cola", "items":1, "cost": 10},
+        {"id":2, "name":"Biscuits", "items":2, "cost": 4},
+        {"id":3, "name":"Apple", "items":5, "cost": 2}
+      ]
+    },
+    {
+      "id": 48,
+      "time": "2",
+      "cost": 15.00,
+      "items":[
+        {"id":1, "name":"Nestle Milk", "items":1, "cost": 20},
+        {"id":2, "name":"Pizza", "items":2, "cost": 5},
+        {"id":3, "name":"Chocolate", "items":5, "cost": 2},
+        {"id":4, "name":"Pineapple", "items":2, "cost": 5}
+      ]
+    },
+    {
+      "id": 48,
+      "time": "3",
+      "cost": 15.00,
+      "items":[
+        {"id":1, "name":"Chocolate", "items":5, "cost": 2},
+        {"id":2, "name":"Pineapple", "items":2, "cost": 5}
+      ]
+    },
+    {
+      "id": 46,
+      "time": "4",
+      "cost": 175.00,
+      "items":[
+        {"id":0, "name":"Milk Shake", "items":4, "cost": 20},
+        {"id":1, "name":"Coca Cola", "items":1, "cost": 10},
+        {"id":3, "name":"Pineapple", "items":2, "cost": 5},
+        {"id":4, "name":"Apple", "items":5, "cost": 2}
+      ]
+    },
+    {
+      "id": 54,
+      "time": "5",
+      "cost": 1150.00,
+      "items":[
+        {"id":1, "name":"Nestle Milk", "items":1, "cost": 20},
+        {"id":2, "name":"Pineapple", "items":2, "cost": 5}
+      ]
+    }
+  ]
+}

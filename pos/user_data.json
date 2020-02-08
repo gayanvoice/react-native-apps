@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "username": "Gayan",
+      "image": "https://avatars1.githubusercontent.com/u/30500175?s=48&v=4",
+      "role": "Admin",
+      "status": true,
+      "time": 4,
+      "bio" : "We recommend that the params you pass are JSON-serializable. That way, you'll be able to use state persistence and your screen components will have the right contract for implementing deep linking."
+    },
+    {
+      "username": "Anna",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_FKKpUwPYOUWCxsr84mafVgIaJcupLoUJLIJEfufP6CGAHACNpg&s",
+      "role": "Admin",
+      "status": true,
+      "time": 5,
+      "bio" : "We recommend that the params you pass are JSON-serializable. That way, you'll be able to use state persistence and your screen components will have the right contract for implementing deep linking."
+    },
+    {
+      "username": "Josh",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMrE6oog7PGIapdpVG-Aw-Gt5Xr5UsztpeVsmQaIguoWQnOVi5&s",
+      "role": "Admin",
+      "status": false,
+      "time": 6,
+      "bio" : "We recommend that the params you pass are JSON-serializable. That way, you'll be able to use state persistence and your screen components will have the right contract for implementing deep linking."
+    },
+    {
+      "username": "Jenny",
+      "image": "https://thumbs.dreamstime.com/z/female-office-worker-2494557.jpg",
+      "role": "Guest",
+      "status": true,
+      "time": 7,
+      "bio" : "We recommend that the params you pass are JSON-serializable. That way, you'll be able to use state persistence and your screen components will have the right contract for implementing deep linking."
+    },
+    {
+      "username": "Bill",
+      "image": "https://thumbs.dreamstime.com/z/female-office-worker-2494557.jpg",
+      "role": "Guest",
+      "status": true,
+      "time": 10,
+      "bio" : "We recommend that the params you pass are JSON-serializable. That way, you'll be able to use state persistence and your screen components will have the right contract for implementing deep linking."
+    }
+  ]
+}
